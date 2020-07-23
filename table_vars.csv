@@ -1,0 +1,35 @@
+covariateName,covariateName_label
+gender = male,male
+gender = female,female
+age group: 15-19,age group: 15-19
+age group: 20-24,age group: 20-24
+age group: 25-29,age group: 25-29
+age group: 30-34,age group: 30-34
+age group: 35-39,age group: 35-39
+age group: 40-44,age group: 40-44
+age group: 45-49,age group: 45-49
+age group: 50-54,age group: 50-54
+age group: 55-59,age group: 55-59
+age group: 60-64,age group: 60-64
+age group: 65-69,age group: 65-69
+age group: 70-74,age group: 70-74
+age group: 75-79,age group: 75-79
+age group: 80-84,age group: 80-84
+age group: 85-89,age group: 85-89
+age group: 90-94,age group: 90-94
+age group: 95-99,age group: 95-99
+condition_era group during day 0 through 0 days relative to index: anemia,Anemia
+condition_era group during day 0 through 0 days relative to index: asthma,Asthma
+condition_era group during day 0 through 0 days relative to index: atrial fibrillation,Atrial fibrillation
+condition_era group during day 0 through 0 days relative to index: chronic obstructive lung disease,COPD
+condition_era group during day 0 through 0 days relative to index: dementia,Dementia
+condition_era group during day 0 through 0 days relative to index: diabetes mellitus,Diabetes mellitus
+condition_era group during day 0 through 0 days relative to index: gastroesophageal reflux disease,Gastroesophageal reflux disease
+condition_era group during day 0 through 0 days relative to index: heart disease,Heart disease
+condition_era group during day 0 through 0 days relative to index: heart failure,Heart failure
+condition_era group during day 0 through 0 days relative to index: hyperlipidemia,Hyperlipidemia
+condition_era group during day 0 through 0 days relative to index: hypertensive disorder,Hypertensive disorder
+condition_era group during day 0 through 0 days relative to index: ischemic heart disease,Ischemic heart disease
+condition_era group during day 0 through 0 days relative to index: malignant neoplastic disease,Malignant neoplastic disease
+condition_era group during day 0 through 0 days relative to index: peripheral vascular disease,Peripheral vascular disease
+condition_era group during day 0 through 0 days relative to index: renal impairment,Renal impairment
