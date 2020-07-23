@@ -1,0 +1,112 @@
+---
+title: "Table of patient characteristics"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning=FALSE,
+                      fig.align = "center", 
+                      dev = "png",
+                      cache = FALSE,
+                      message=FALSE)
+```
+
+```{r packages, include=FALSE}
+# packages
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(readr)
+
+library(flextable)
+library(officer)
+
+
+
+```
+
+```{r functions, include=FALSE}
+# functions -----
+# printing numbers with 1 decimal place and commas 
+nice.num<-function(x) {
+  format(round(x,1),
+         big.mark=",", nsmall = 1, digits=1)}
+# printing numbers with 2 decimal place and commas 
+nice.num2<-function(x) {
+  format(round(x,2),
+         big.mark=",", nsmall = 2, digits=2)}
+# for counts- without decimal place
+nice.num.count<-function(x) {
+  format(x,
+         big.mark=",", nsmall = 0, digits=0)}
+
+```
+
+```{r data, include=FALSE}
+
+get.results.set<-
+  function(results.folder, 
+           merge.results){
+if(merge.results==TRUE){
+preMergeResultsFiles(results.folder)
+  }else {
+load(paste0(results.folder, "/PreMerged.RData"), envir = globalenv())
+  }
+  }
+
+
+# of interest ----
+databases<-c("CDM_Premier_COVID_v1240", 
+             "IQVIA_OpenClaims", 
+             "optum_ehr_covid_v1239", 
+             "HealthVerity",
+             "VA-OMOP")
+cohort.names<-c("Persons hospitalized with a COVID-19 diagnosis record or a SARS-CoV-2 positive test with no required prior observation") 
+cohort_ids<-c(135)
+time.window<-"0 through 30"
+
+# get results -----
+results.folder<-"C:/Users/Ed/Dropbox/OHDSI/covid/charybdis/StudyResults"
+
+get.results.set(results.folder=results.folder, 
+           merge.results=FALSE) # we've already put them together
+
+# get reference -----
+table_vars <- read_csv("C:/Users/Ed/Dropbox/OHDSI/covid/charybdis/table_vars.csv")
+## ------
+covs_of_interest<- table_vars %>% 
+  left_join(covariate)
+
+# get values of interest ---
+covs_values<-covs_of_interest %>% 
+  left_join(covariateValue)
+covs_values<-covs_values %>% 
+  filter(databaseId %in% {{databases}}) %>% 
+  filter(!is.na(mean)) %>% 
+#  filter(mean>0) %>% 
+  filter(cohortId %in% {{cohort_ids}})
+ 
+covs_values_wide<-covs_values %>% 
+  mutate(mean_sd=paste0(nice.num(mean*100),"% (" ,
+                        nice.num(sd), ")")) %>% 
+  select(covariateName_label,mean_sd, databaseId) %>% 
+  pivot_wider(names_from = databaseId, values_from = mean_sd)
+
+
+```
+
+```{r}
+ft <- flextable(covs_values_wide) 
+autofit(ft)
+
+
+```
+
+
+
